@@ -107,12 +107,12 @@ func (tmc *TemporalMemoryConnections) UpdateSynapsePermanence(synapse int, perma
 	tmc.synapses[synapse].Permanence = permanence
 }
 
-//Returns the index of the column that a cell belongs to.
+//ColumnForCell returns the index of the column that a cell belongs to.
 func (tmc *TemporalMemoryConnections) ColumnForCell(cell int) int {
 	return int(cell / tmc.CellsPerColumn)
 }
 
-//Returns the indices of cells that belong to a column.
+//CellsForColumn returns the indices of cells that belong to a column.
 func (tmc *TemporalMemoryConnections) CellsForColumn(column int) []int {
 	start := tmc.CellsPerColumn * column
 	result := make([]int, tmc.CellsPerColumn)
@@ -122,39 +122,39 @@ func (tmc *TemporalMemoryConnections) CellsForColumn(column int) []int {
 	return result
 }
 
-//Returns the cell that a segment belongs to.
+//CellForSegment returns the cell that a segment belongs to.
 func (tmc *TemporalMemoryConnections) CellForSegment(segment int) int {
 	return tmc.segments[segment]
 }
 
-//Returns the segments that belong to a cell.
+//SegmentsForCell returns the segments that belong to a cell.
 func (tmc *TemporalMemoryConnections) SegmentsForCell(cell int) []int {
 	return tmc.segmentsForCell[cell]
 }
 
-//Returns synapse data for specified index
+//DataForSynapse returns synapse data for specified index
 func (tmc *TemporalMemoryConnections) DataForSynapse(synapse int) *TmSynapse {
 	return tmc.synapses[synapse]
 }
 
-//Returns the synapses on a segment.
+//SynapsesForSegment returns the synapses on a segment.
 func (tmc *TemporalMemoryConnections) SynapsesForSegment(segment int) []int {
 	return tmc.synapsesForSegment[segment]
 }
 
-//Returns the synapses for the source cell that they synapse on.
+//SynapsesForSourceCell returns the synapses for the source cell that they synapse on.
 func (tmc *TemporalMemoryConnections) SynapsesForSourceCell(sourceCell int) []int {
 	return tmc.synapsesForSourceCell[sourceCell]
 }
 
 // Helpers
 
-//Returns the number of columns in this layer.
+//NumberOfColumns returns the number of columns in this layer.
 func (tmc *TemporalMemoryConnections) NumberOfColumns() int {
 	return ints.Prod(tmc.ColumnDimensions)
 }
 
-//Returns the number of cells in this layer.
+//NumberOfcells returns the number of cells in this layer.
 func (tmc *TemporalMemoryConnections) NumberOfcells() int {
 	return tmc.NumberOfColumns() * tmc.CellsPerColumn
 }

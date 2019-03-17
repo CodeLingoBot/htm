@@ -282,6 +282,7 @@ func (s *Segment) updateSynapses(synapses []int, delta float64) bool {
 
 /*
 Adds a new synapse
+*/AddSynapse adds a new synapse
 */
 func (s *Segment) AddSynapse(srcCellCol, srcCellIdx int, perm float64) {
 	s.syns = append(s.syns, Synapse{srcCellCol, srcCellIdx, perm})
@@ -341,6 +342,20 @@ func (tp *TemporalPooler) getSegmentActiveSynapses(c int, i int, s *Segment,
 
 /*
 Print segment information for verbose messaging and debugging.
+This uses the following format:
+
+ID:54413 True 0.64801 (24/36) 101 [9,1]0.75 [10,1]0.75 [11,1]0.75
+
+where:
+54413 - is the unique segment id
+True - is sequence segment
+0.64801 - moving average duty cycle
+(24/36) - (numPositiveActivations / numTotalActivations)
+101 - age, number of iterations since last activated
+[9,1]0.75 - synapse from column 9, cell #1, strength 0.75
+[10,1]0.75 - synapse from column 10, cell #1, strength 0.75
+[11,1]0.75 - synapse from column 11, cell #1, strength 0.75
+*/Print segment information for verbose messaging and debugging.
 This uses the following format:
 
 ID:54413 True 0.64801 (24/36) 101 [9,1]0.75 [10,1]0.75 [11,1]0.75

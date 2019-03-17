@@ -261,22 +261,22 @@ func NewSpatialPooler(spParams SpParams) *SpatialPooler {
 	return &sp
 }
 
-//Returns number of inputs
+//NumInputs returns number of inputs
 func (sp *SpatialPooler) NumInputs() int {
 	return sp.numInputs
 }
 
-//Returns number of columns
+//NumColumns returns number of columns
 func (sp *SpatialPooler) NumColumns() int {
 	return sp.numColumns
 }
 
-//Returns number of inputs
+//NumInputs returns number of inputs
 func (ssp *SpParams) NumInputs() int {
 	return utils.ProdInt(ssp.InputDimensions)
 }
 
-//Returns number of columns
+//NumColumns returns number of columns
 func (ssp *SpParams) NumColumns() int {
 	return utils.ProdInt(ssp.ColumnDimensions)
 }
@@ -543,6 +543,32 @@ func (sp *SpatialPooler) updatePermanencesForColumn(perm []float64, index int, r
 
 /*
  This is the primary public method of the SpatialPooler class. This
+ function takes a input vector and outputs the indices of the active columns.
+ If 'learn' is set to True, this method also updates the permanences of the
+ columns.
+
+Parameters:
+----------------------------
+inputVector: a numpy array of 0's and 1's thata comprises the input to
+			 the spatial pooler. The array will be treated as a one
+			 dimensional array, therefore the dimensions of the array
+			 do not have to much the exact dimensions specified in the
+			 class constructor. In fact, even a list would suffice.
+			The number of input bits in the vector must, however,
+			match the number of bits specified by the call to the
+			constructor. Therefore there must be a '0' or '1' in the
+			array for every input bit.
+learn: a boolean value indicating whether learning should be
+	   performed. Learning entails updating the permanence
+	   values of the synapses, and hence modifying the 'state'
+	   of the model. Setting learning to 'off' freezes the SP
+	   and has many uses. For example, you might want to feed in
+	   various inputs and examine the resulting SDR's.
+activeArray: an array whose size is equal to the number of columns.
+	   Before the function returns this array will be populated
+       with 1's at the indices of the active columns, and 0's
+	   everywhere else.
+*/This is the primary public method of the SpatialPooler class. This
  function takes a input vector and outputs the indices of the active columns.
  If 'learn' is set to True, this method also updates the permanences of the
  columns.

@@ -73,7 +73,7 @@ func FillSliceRangeBool(values []bool, value bool, start, length int) {
 	}
 }
 
-//Returns the subset of values specified by indices
+//SubsetSliceInt returns the subset of values specified by indices
 func SubsetSliceInt(values, indices []int) []int {
 	result := make([]int, len(indices))
 	for i, val := range indices {
@@ -82,7 +82,7 @@ func SubsetSliceInt(values, indices []int) []int {
 	return result
 }
 
-//Returns the subset of values specified by indices
+//SubsetSliceFloat64 returns the subset of values specified by indices
 func SubsetSliceFloat64(values []float64, indices []int) []float64 {
 	result := make([]float64, len(indices))
 	for i, val := range indices {
@@ -91,7 +91,7 @@ func SubsetSliceFloat64(values []float64, indices []int) []float64 {
 	return result
 }
 
-//returns a copy of specified indices
+//SubsetSliceBool returns a copy of specified indices
 func SubsetSliceBool(values []bool, indices []int) []bool {
 	result := make([]bool, len(indices))
 	for i, val := range indices {
@@ -107,7 +107,7 @@ func SetIdxBool(values []bool, indexes []int, value bool) {
 	}
 }
 
-//Compares 2 bool slices for equality
+//BoolEq compares 2 bool slices for equality
 func BoolEq(a, b []bool) bool {
 	if len(a) != len(b) {
 		return false
@@ -144,7 +144,7 @@ func MakeSliceFloat64(size int, initialValue float64) []float64 {
 	return result
 }
 
-//Returns cartesian product of specified
+//CartProductInt returns cartesian product of specified
 //2d arrayb
 func CartProductInt(values [][]int) [][]int {
 	pos := make([]int, len(values))
@@ -204,7 +204,7 @@ func RandFloatRange(min, max float64) float64 {
 	return rand.Float64()*(max-min) + min
 }
 
-//returns max index wise comparison
+//MaxInt returns max index wise comparison
 func MaxInt(a, b []int) []int {
 	result := make([]int, len(a))
 	for i := 0; i < len(a); i++ {
@@ -218,7 +218,7 @@ func MaxInt(a, b []int) []int {
 	return result
 }
 
-//Returns max value from specified int slice
+//MaxSliceInt returns max value from specified int slice
 func MaxSliceInt(values []int) int {
 	max := 0
 	for i := 0; i < len(values); i++ {
@@ -229,7 +229,7 @@ func MaxSliceInt(values []int) int {
 	return max
 }
 
-//Returns max value from specified float slice
+//MaxSliceFloat64 returns max value from specified float slice
 func MaxSliceFloat64(values []float64) float64 {
 	max := 0.0
 	for i := 0; i < len(values); i++ {
@@ -240,7 +240,7 @@ func MaxSliceFloat64(values []float64) float64 {
 	return max
 }
 
-//Returns product of set of integers
+//ProdInt returns product of set of integers
 func ProdInt(vals []int) int {
 	sum := 1
 	for x := 0; x < len(vals); x++ {
@@ -254,7 +254,7 @@ func ProdInt(vals []int) int {
 	}
 }
 
-//Returns cumulative product
+//CumProdInt returns cumulative product
 func CumProdInt(vals []int) []int {
 	if len(vals) < 2 {
 		return vals
@@ -268,7 +268,7 @@ func CumProdInt(vals []int) []int {
 	return result
 }
 
-//Returns cumulative product starting from end
+//RevCumProdInt returns cumulative product starting from end
 func RevCumProdInt(vals []int) []int {
 	if len(vals) < 2 {
 		return vals
@@ -330,7 +330,7 @@ func Make1DBool(values []int) []bool {
 	return result
 }
 
-//Returns number of on bits
+//CountInt returns number of on bits
 func CountInt(values []int, value int) int {
 	count := 0
 	for _, val := range values {
@@ -341,7 +341,7 @@ func CountInt(values []int, value int) int {
 	return count
 }
 
-//Returns number of on bits
+//CountFloat64 returns number of on bits
 func CountFloat64(values []float64, value float64) int {
 	count := 0
 	for _, val := range values {
@@ -352,7 +352,7 @@ func CountFloat64(values []float64, value float64) int {
 	return count
 }
 
-//Returns number of on bits
+//CountTrue returns number of on bits
 func CountTrue(values []bool) int {
 	count := 0
 	for _, val := range values {
@@ -363,7 +363,7 @@ func CountTrue(values []bool) int {
 	return count
 }
 
-//Returns number of on bits
+//AnyTrue returns number of on bits
 func AnyTrue(values []bool) bool {
 	for _, val := range values {
 		if val {
@@ -382,7 +382,7 @@ func OrBool(a, b []bool) []bool {
 	return result
 }
 
-//Returns random slice of floats of specified length
+//RandomSample returns random slice of floats of specified length
 func RandomSample(length int) []float64 {
 	result := make([]float64, length)
 
@@ -419,7 +419,7 @@ func SumSliceFloat64(values []float64) float64 {
 	return result
 }
 
-//Returns "on" indices
+//OnIndices returns "on" indices
 func OnIndices(s []bool) []int {
 	var result []int
 	for idx, val := range s {
@@ -430,7 +430,7 @@ func OnIndices(s []bool) []int {
 	return result
 }
 
-// Returns complement of s and t
+// Complement returns complement of s and t
 func Complement(s []int, t []int) []int {
 	result := make([]int, 0, len(s))
 	for _, val := range s {

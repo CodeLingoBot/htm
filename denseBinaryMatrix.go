@@ -81,7 +81,7 @@ func (sm *DenseBinaryMatrix) toIndex(index int) (row int, col int) {
 	return
 }
 
-//Returns all true/on indices
+//Entries returns all true/on indices
 func (sm *DenseBinaryMatrix) Entries() []SparseEntry {
 	result := make([]SparseEntry, 0, int(float64(len(sm.entries))*0.3))
 	for idx, val := range sm.entries {
@@ -93,7 +93,7 @@ func (sm *DenseBinaryMatrix) Entries() []SparseEntry {
 	return result
 }
 
-//Returns flattend dense represenation
+//Flatten returns flattend dense represenation
 func (sm *DenseBinaryMatrix) Flatten() []bool {
 	result := make([]bool, sm.Height*sm.Width)
 	for _, val := range sm.Entries() {
@@ -129,7 +129,7 @@ func (sm *DenseBinaryMatrix) Set(row int, col int, value bool) {
 	sm.entries[row*sm.Width+col] = value
 }
 
-//Replaces specified row with values, assumes values is ordered
+//ReplaceRow replaces specified row with values, assumes values is ordered
 //correctly
 func (sm *DenseBinaryMatrix) ReplaceRow(row int, values []bool) {
 	sm.validateRowCol(row, len(values))
@@ -139,7 +139,7 @@ func (sm *DenseBinaryMatrix) ReplaceRow(row int, values []bool) {
 	}
 }
 
-//Replaces row with true values at specified indices
+//ReplaceRowByIndices replaces row with true values at specified indices
 func (sm *DenseBinaryMatrix) ReplaceRowByIndices(row int, indices []int) {
 	sm.validateRow(row)
 	start := row * sm.Width
@@ -148,7 +148,7 @@ func (sm *DenseBinaryMatrix) ReplaceRowByIndices(row int, indices []int) {
 	}
 }
 
-//Returns dense row
+//GetDenseRow returns dense row
 func (sm *DenseBinaryMatrix) GetDenseRow(row int) []bool {
 	sm.validateRow(row)
 	result := make([]bool, sm.Width)
@@ -161,7 +161,7 @@ func (sm *DenseBinaryMatrix) GetDenseRow(row int) []bool {
 	return result
 }
 
-//Returns a rows "on" indices
+//GetRowIndices returns a rows "on" indices
 func (sm *DenseBinaryMatrix) GetRowIndices(row int) []int {
 	result := make([]int, 0, sm.Width)
 	start := row * sm.Width
@@ -200,7 +200,7 @@ func (sm *DenseBinaryMatrix) RowAndSum(row []bool) []int {
 	return result
 }
 
-//Returns row indexes with at least 1 true column
+//NonZeroRows returns row indexes with at least 1 true column
 func (sm *DenseBinaryMatrix) NonZeroRows() []int {
 	counts := make(map[int]int, sm.Height)
 
@@ -221,12 +221,12 @@ func (sm *DenseBinaryMatrix) NonZeroRows() []int {
 	return result
 }
 
-//Returns # of rows with at least 1 true value
+//TotalTrueRows returns # of rows with at least 1 true value
 func (sm *DenseBinaryMatrix) TotalTrueRows() int {
 	return len(sm.NonZeroRows())
 }
 
-//Returns total true entries
+//TotalNonZeroCount returns total true entries
 func (sm *DenseBinaryMatrix) TotalNonZeroCount() int {
 	return len(sm.Entries())
 }
@@ -246,7 +246,7 @@ func (sm *DenseBinaryMatrix) Or(sm2 *DenseBinaryMatrix) *DenseBinaryMatrix {
 	return result
 }
 
-//Clears  all entries
+//Clear clears all entries
 func (sm *DenseBinaryMatrix) Clear() {
 	utils.FillSliceBool(sm.entries, false)
 }

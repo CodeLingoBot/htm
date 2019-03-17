@@ -299,6 +299,7 @@ func (se *ScalerEncoder) getBucketIndices(input float64) []int {
 
 /*
  Returns encoded input
+*/Encode returns encoded input
 */
 func (se *ScalerEncoder) Encode(input float64, learn bool) (output []bool) {
 	output = make([]bool, se.N)
@@ -308,6 +309,7 @@ func (se *ScalerEncoder) Encode(input float64, learn bool) (output []bool) {
 
 /*
 	Encodes input to specified slice. Slice should be valid length
+*/Encodes input to specified slice. Slice should be valid length
 */
 func (se *ScalerEncoder) EncodeToSlice(input float64, learn bool, output []bool) {
 

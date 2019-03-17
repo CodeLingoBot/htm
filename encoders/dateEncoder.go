@@ -73,6 +73,7 @@ type DateEncoder struct {
 
 /*
 	Intializes a new date encoder
+*/Intializes a new date encoder
 */
 func NewDateEncoder(params *DateEncoderParams) *DateEncoder {
 	de := new(DateEncoder)
@@ -248,6 +249,7 @@ func (de *DateEncoder) getTimeOfDayScaler(date time.Time) float64 {
 
 /*
 	Encodes input to specifed slice
+*/Encodes input to specifed slice
 */
 func (de *DateEncoder) EncodeToSlice(date time.Time, output []bool) {
 
@@ -284,6 +286,7 @@ func (de *DateEncoder) EncodeToSlice(date time.Time, output []bool) {
 
 /*
 	Returns encoded date/time
+*/Encode returns encoded date/time
 */
 func (de *DateEncoder) Encode(date time.Time) []bool {
 	output := make([]bool, de.width)
@@ -293,6 +296,7 @@ func (de *DateEncoder) Encode(date time.Time) []bool {
 
 /*
  Encoder description
+*/Encoder description
 */
 func (de *DateEncoder) Description(date time.Time) string {
 	return fmt.Sprintf("season %v ", de.seasonOffset) +

@@ -286,7 +286,7 @@ func NewTemporalPooler(tParams TemporalPoolerParams) *TemporalPooler {
 	return tp
 }
 
-//Returns new unique segment id
+//GetSegId returns new unique segment id
 func (tp *TemporalPooler) GetSegId() int {
 	result := tp.segId
 	tp.segId++
@@ -327,6 +327,23 @@ func (tp *TemporalPooler) topDownCompute() []float64 {
 
 /*
  This function gives the future predictions for <nSteps> timesteps starting
+from the current TP state. The TP is returned to its original state at the
+end before returning.
+
+- We save the TP state.
+- Loop for nSteps
+- Turn-on with lateral support from the current active cells
+- Set the predicted cells as the next step's active cells. This step
+in learn and infer methods use input here to correct the predictions.
+We don't use any input here.
+- Revert back the TP state to the time before prediction
+
+param nSteps The number of future time steps to be predicted
+returns all the future predictions - floating point matrix and
+shape (nSteps, numberOfCols).
+The ith row gives the tp prediction for each column at
+a future timestep (t+i+1).
+*/This function gives the future predictions for <nSteps> timesteps starting
 from the current TP state. The TP is returned to its original state at the
 end before returning.
 
@@ -1902,6 +1919,20 @@ func (tp *TemporalPooler) updateLearningState(activeColumns []int) {
 
 /*
  Handle one compute, possibly learning.
+
+param bottomUpInput The bottom-up input, typically from a spatial pooler
+param enableLearn If true, perform learning
+param computeInfOutput If None, default behavior is to disable the inference
+output when enableLearn is on.
+If true, compute the inference output
+If false, do not compute the inference output
+
+It is an error to have both enableLearn and computeInfOutput set to False
+
+By default, we don't compute the inference output when learning because it
+slows things down, but you can override this by passing in True for
+computeInfOutput
+*/Compute handles one compute, possibly learning.
 
 param bottomUpInput The bottom-up input, typically from a spatial pooler
 param enableLearn If true, perform learning

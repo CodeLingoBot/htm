@@ -94,12 +94,12 @@ func NewSparseBinaryMatrixFromInts(values [][]int) *SparseBinaryMatrix {
 // func (sm *SparseBinaryMatrix) Resize(width int, height int) {
 // }
 
-//Returns all true/on indices
+//Entries returns all true/on indices
 func (sm *SparseBinaryMatrix) Entries() []SparseEntry {
 	return sm.entries
 }
 
-//Returns flattend dense represenation
+//Flatten returns flattend dense represenation
 func (sm *SparseBinaryMatrix) Flatten() []bool {
 	result := make([]bool, sm.Height*sm.Width)
 	for _, val := range sm.entries {
@@ -145,7 +145,7 @@ func (sm *SparseBinaryMatrix) Set(row int, col int, value bool) {
 
 }
 
-//Replaces specified row with values, assumes values is ordered
+//ReplaceRow replaces specified row with values, assumes values is ordered
 //correctly
 func (sm *SparseBinaryMatrix) ReplaceRow(row int, values []bool) {
 	sm.validateRowCol(row, len(values))
@@ -155,7 +155,7 @@ func (sm *SparseBinaryMatrix) ReplaceRow(row int, values []bool) {
 	}
 }
 
-//Replaces row with true values at specified indices
+//ReplaceRowByIndices replaces row with true values at specified indices
 func (sm *SparseBinaryMatrix) ReplaceRowByIndices(row int, indices []int) {
 	sm.validateRow(row)
 
@@ -171,7 +171,7 @@ func (sm *SparseBinaryMatrix) ReplaceRowByIndices(row int, indices []int) {
 	}
 }
 
-//Returns dense row
+//GetDenseRow returns dense row
 func (sm *SparseBinaryMatrix) GetDenseRow(row int) []bool {
 	sm.validateRow(row)
 	result := make([]bool, sm.Width)
@@ -185,7 +185,7 @@ func (sm *SparseBinaryMatrix) GetDenseRow(row int) []bool {
 	return result
 }
 
-//Returns a rows "on" indices
+//GetRowIndices returns a rows "on" indices
 func (sm *SparseBinaryMatrix) GetRowIndices(row int) []int {
 	result := []int{}
 	for i := 0; i < len(sm.entries); i++ {
@@ -219,7 +219,7 @@ func (sm *SparseBinaryMatrix) RowAndSum(row []bool) []int {
 	return result
 }
 
-//Returns row indexes with at least 1 true column
+//NonZeroRows returns row indexes with at least 1 true column
 func (sm *SparseBinaryMatrix) NonZeroRows() []int {
 	var result []int
 
@@ -232,7 +232,7 @@ func (sm *SparseBinaryMatrix) NonZeroRows() []int {
 	return result
 }
 
-//Returns # of rows with at least 1 true value
+//TotalTrueRows returns # of rows with at least 1 true value
 func (sm *SparseBinaryMatrix) TotalTrueRows() int {
 	var hitRows []int
 	for _, val := range sm.entries {
@@ -243,7 +243,7 @@ func (sm *SparseBinaryMatrix) TotalTrueRows() int {
 	return len(hitRows)
 }
 
-//Returns # of cols with at least 1 true value
+//TotalTrueCols returns # of cols with at least 1 true value
 func (sm *SparseBinaryMatrix) TotalTrueCols() int {
 	var hitCols []int
 	for _, val := range sm.entries {
@@ -254,7 +254,7 @@ func (sm *SparseBinaryMatrix) TotalTrueCols() int {
 	return len(hitCols)
 }
 
-//Returns total true entries
+//TotalNonZeroCount returns total true entries
 func (sm *SparseBinaryMatrix) TotalNonZeroCount() int {
 	return len(sm.entries)
 }
@@ -274,7 +274,7 @@ func (sm *SparseBinaryMatrix) Or(sm2 *SparseBinaryMatrix) *SparseBinaryMatrix {
 	return result
 }
 
-//Clears  all entries
+//Clear clears all entries
 func (sm *SparseBinaryMatrix) Clear() {
 	sm.entries = nil
 }
